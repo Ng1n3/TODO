@@ -6,7 +6,7 @@ const ValidUserCreation = async (req, res, next) => {
       username: joi.string().required(),
       email: joi.string().email().required(),
       password: joi.string().required(),
-      gender: joi.string().valid()("male", "female"),
+      gender: joi.string().valid("male", "female"),
       contact: joi.string().required(),
       phone_number: joi.string().required(),
     });

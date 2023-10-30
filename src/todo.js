@@ -6,7 +6,7 @@ const userRoute = require("./v1/users.routes");
 // const viewRouter = require('./views/views.router')
 const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
-const UserModel = require("./model/users.model");
+const todoRouter = require('./v1/todo.routes');
 db.connect();
 const app = express();
 const PORT = process.env.PORT;
@@ -32,13 +32,15 @@ const store = new MongoStore({
   });
 
 /* Middlewares */
-app.use(express.static(__dirname + "public"));
+app.use(express.static(__dirname + "/public"));
+// app.use(express.static('/public/'));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use('/views', viewRouter);
 app.use("/users", userRoute);
+app.use('/todos', todoRouter);
 
 const isAuth = (req, res, next) => {
   if (req.session.isAuth) {

@@ -35,8 +35,11 @@ const createUser = async (req, res) => {
     phone_number: userInput.phone_number
   });
 
+  req.session.username = user.username;
+  req.session.userId = user._id;
+  req.session.isLoggedIn = true;
   await user.save();
-  res.render("note");
+  res.redirect("note");
 };
 
 const loginUser = async (req, res) => {
@@ -58,11 +61,10 @@ const loginUser = async (req, res) => {
     });
   }
   req.session.username = user.username;
-  console.log(req.session);
   req.session.userId = user._id;
   req.session.isLoggedIn = true;
+  console.log(req.session);
   res.redirect('/users/note');
 };
-
 
 module.exports = { createUser, loginUser };
