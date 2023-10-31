@@ -63,7 +63,6 @@ const loginUser = async (req, res) => {
   req.session.username = user.username;
   req.session.userId = user._id;
   req.session.isLoggedIn = true;
-  console.log(req.session);
   res.redirect('/users/note');
 };
 

@@ -6,11 +6,11 @@ const todoModel = require("../model/todo.model");
 const userModel = require("../model/users.model");
 
 router.get("/signup", (req, res) => {
-  res.render("signup");
+  res.render("signup", {title: "Signup"});
 });
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login", {title: 'Login'});
 });
 router.post("/signup", middleware.ValidUserCreation, controller.createUser);
 
@@ -19,19 +19,24 @@ router.post("/login", middleware.loginValidation, controller.loginUser);
 router.get("/note", middleware.isAuth, async (req, res) => {
   const todos = await todoModel.find({ user_id: req.session.userId });
   const user = await userModel.find({ username: req.session.username });
-  console.log(user);
-  console.log(todos);
-
-  res.render("note", { todos, user });
+  res.render("note", { todos, user, title: "Dashboard" });
 });
 
-router.post("/note", middleware.isAuth, async (req, res) => {
-  const { tasks, state } = req.body;
-  const todos = await todoModel.create({ user_id: req.session.userId, tasks, state });
-  const user = await userModel.find({ username: req.session.username });
-  await todos.save();
+router.post("/api/note", middleware.isAuth, async (req, res) => {
+  const { tasks } = req.body;
+  const userId = req.session.userId;
+  const todos = await todoModel.create({
+    tasks,
+    user_id: userId,
+  });
+  const savedTodos = await todos.save();
+  res.json(savedTodos);
+});
 
-  res.redirect(303, "/users/note");
+router.get("/api/note", middleware.isAuth, async (req, res) => {
+  const userId = req.session.userId;
+  const todos = await todoModel.find({ user_id: userId });
+  res.json(todos);
 });
 
 router.get("/logout", (req, res) => {
@@ -42,3 +47,4 @@ router.get("/logout", (req, res) => {
 });
 
 module.exports = router;
+
