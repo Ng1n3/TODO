@@ -34,6 +34,7 @@ router.get("/note", middleware.isAuth, async (req, res) => {
   }
 });
 
+
 // Get total count of tasks
 router.get("/api/note/count", middleware.isAuth, async (req, res) => {
   try {

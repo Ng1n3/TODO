@@ -6,10 +6,9 @@ const userRoute = require("./v1/users.routes");
 // const viewRouter = require('./views/views.router')
 const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
-const todoRouter = require('./v1/todo.routes');
 db.connect();
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4002;
 
 const store = new MongoStore({
     uri: process.env.MONGO_URL,
@@ -40,7 +39,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use('/views', viewRouter);
 app.use("/users", userRoute);
-app.use('/todos', todoRouter);
 
 const isAuth = (req, res, next) => {
   if (req.session.isAuth) {
