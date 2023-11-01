@@ -5,7 +5,7 @@
   "main": "todo.js",
   "scripts": {
     "start:dev": "nodemon src/todo.js",
-    "start": "node src/todo.js"
+    "start": "node ./src/todo.js"
   },
   "keywords": [],
   "author": "",
