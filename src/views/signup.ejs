@@ -1,15 +1,18 @@
 <%- include('./partials/header.ejs') %>
 <body>
-    <form action="/users/signup" method="post">
-        <input type="text" placeholder="username" name="username"><br>
-        <input type="email" placeholder="email" name="email"><br>
-        <input type="password" placeholder="password" name="password"><br>
-        <input type="text" placeholder="gender" name="gender"><br>
-        <input type="text" placeholder="contact Address" name="contact"><br>
-        <input type="text" placeholder="Phone Number" name="phone_number"><br>
+    <div class="body-container">
+        <img class="logo" src="/img/logo.png" alt="logo" />
+        <form action="/users/signup" method="POST">
+        <input class="input" type="text" placeholder="username" name="username" required><br>
+        <input class="input" type="email" placeholder="email" name="email" required><br>
+        <input class="input" type="password" placeholder="password" name="password" required><br>
+        <input class="input" type="text" placeholder="gender" name="gender" required><br>
+        <input class="input" type="text" placeholder="contact Address" name="contact" required><br>
+        <input class="input" type="text" placeholder="Phone Number" name="phone_number" required><br>
         <button>signup</button>
     </form>
-    <button><a href="/login">Logout</a></button>
+    <button><a href="/users/login">Login</a></button>
+    </div>
 </body>
 <%- include('./partials/footer.ejs') %>
 </html>

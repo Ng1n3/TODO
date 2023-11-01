@@ -1,32 +1,43 @@
 <%- include('./partials/header.ejs') %>
   <body>
-    <img src="/img/logo.png" alt="logo" />
-    <% if (user) { %>
-    <h1 class="intro">Hi, <%= user[0].username %>, Here are your tasks.</h1>
-    <form class="inputTodoForm" role="form" id="inputTodoForm">
-      <input
-        type="text"
-        id="taskInput"
-        name="tasks"
-        class="create_task"
-        required
-      />
-      <button type="submit" class="add">add</button>
-    </form>
-
-    <div class="tasks">
-      <h2>Tasks</h2>
-      <ul id="new_tasks" class="new_tasks"></ul>
+    <div class="body-container">
+      <img class="logo" src="/img/logo.png" alt="logo" />
+      <% if (user) { %>
+      <h1 class="intro">Hi, <%= user[0].username %>, Here are your tasks.</h1>
+      <form class="inputTodoForm" role="form" id="inputTodoForm">
+        <input
+          type="text"
+          id="taskInput"
+          name="tasks"
+          class="create_task"
+          placeholder="Enter your tasks"
+          required
+        />
+        <button type="submit" class="add">add</button>
+      </form>
+  
+      <div class="tasks">
+        <div class="tasks_head">
+          <h2 class="tasks_heading">Tasks</h2>
+            <h2 class="tasks_heading number" id="totalTasks"> Loading...</h2>
+        </div>
+        <ul id="new_tasks" class="new_tasks"></ul>
+        <h3 class="completed-heading">Completed Tasks</h3>
+        <ul id="completed_tasks" class="new_tasks"></ul>
+      </div>
+  
+      <form action="/users/logout" method="get">
+        <button>Logout</button>
+      </form>
+      <form id="deleteForm">
+        <button id="deleteButton" class="delete">Delete</button>
+      </form>
+      <% } else { %>
+      <form action="/users/logout" method="get">
+        <button>Logout</button>
+      </form>
+      <% } %>
     </div>
-
-    <form action="/users/logout" method="get">
-      <button>Logout</button>
-    </form>
-    <% } else { %>
-    <form action="/users/logout" method="get">
-      <button>Logout</button>
-    </form>
-    <% } %>
   </body>
   <%- include('./partials/footer.ejs') %>
 </html>

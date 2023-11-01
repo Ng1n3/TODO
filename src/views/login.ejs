@@ -1,13 +1,14 @@
 <%- include('./partials/header.ejs') %>
 <body>
-    <img src="/img/logo.png" alt="logo" />
-
-    <form action="/users/login" method="post">
-        <input type="email" placeholder="email" name="email"><br>
-        <input type="password" placeholder="password" name="password"><br>
-        <button>Signin</button>
-    </form>
-    <button><a href="/signup">Logout</a></button>
+    <div class="body-container">
+        <img class="logo" src="/img/logo.png" alt="logo" />
+        <form action="/users/login" method="post">
+            <input type="email" placeholder="email" name="email" class="input" required><br>
+            <input type="password" placeholder="password" class="input" name="password" required><br>
+            <button>Signin</button>
+        </form>
+        <button><a href="/users/signup">SignUp</a></button>
+    </div>
 </body>
 <%- include('./partials/footer.ejs') %>
 </html>
