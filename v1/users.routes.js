@@ -15,6 +15,7 @@ router.get("/login", (req, res) => {
   res.render("login", { title: "Login" });
 });
 
+
 // Handle user signup
 router.post("/signup", middleware.ValidUserCreation, controller.createUser);
 
@@ -107,4 +108,3 @@ router.get("/logout", (req, res) => {
 });
 
 module.exports = router;
-
